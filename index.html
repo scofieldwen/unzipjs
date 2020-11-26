@@ -1,59 +1,61 @@
-<html><head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="./zip.js"></script>
-    <script src="./mime-types.js"></script>
-    <script src="./jquery.js"></script>
-    <script src="./UnZipArchive.js"></script>
-    <!-- <script src="http://sqqihao.github.io/codes/zipjs/zip.js"></script>
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title></title>
+        <script src="https://scofieldwen.github.io/unzipjs/zip.js"></script>
+        <script src="./mime-types.js"></script>
+        <script src="./jquery.js"></script>
+        <script src="https://scofieldwen.github.io/unzipjs/UnZipArchive.js"></script>
+        <!-- <script src="http://sqqihao.github.io/codes/zipjs/zip.js"></script>
     <script src="http://gildas-lormeau.github.io/zip.js/demos/mime-types.js"></script>
     <script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.js"></script>
     <script src="http://sqqihao.github.io/codes/zipjs/UnZipArchive.js"></script> -->
-    <style>
-        code{
-            display: block;
-            padding: 10px;
-            background: #eee;
-        }
-    </style>
-</head>
-<body style="zoom: 1;">
-<div>
-    <h1>
-        兼容性
-    </h1>
-    <div>
-        <p>
-            zip.js可以在所有的chrome浏览器和firefox浏览器中运行， 可以在safari6和IE10，以及IE10以上运行;
-        </p>
-    </div>
+        <style>
+            code {
+                display: block;
+                padding: 10px;
+                background: #eee;
+            }
+        </style>
+    </head>
+    <body style="zoom: 1">
+        <div>
+            <h1>兼容性</h1>
+            <div>
+                <p>
+                    zip.js可以在所有的chrome浏览器和firefox浏览器中运行，
+                    可以在safari6和IE10，以及IE10以上运行;
+                </p>
+            </div>
 
-    <h2>
-        demo
-    </h2>
-    <div>
-        <input type="file" id="file">
-    </div>
-    <ul id="dir">
-
-    </ul>
-    <script>
-        $("#file").change(function (e) {
-            var file = this.files[0];
-            window.un = new UnZipArchive( file );
-            un.getData( function() {
-                var arr = un.getEntries();
-                var str = "";
-                for(var i=0; i<arr.length; i++ ) {
-                    str += "<li onclick=download('"+arr[i]+"')>"+arr[i]+"</li>"
+            <h2>demo</h2>
+            <div>
+                <input type="file" id="file" />
+            </div>
+            <ul id="dir"></ul>
+            <script>
+                $('#file').change(function (e) {
+                    var file = this.files[0];
+                    window.un = new UnZipArchive(file);
+                    un.getData(function () {
+                        var arr = un.getEntries();
+                        var str = '';
+                        for (var i = 0; i < arr.length; i++) {
+                            str +=
+                                "<li onclick=download('" +
+                                arr[i] +
+                                "')>" +
+                                arr[i] +
+                                '</li>';
+                        }
+                        $('#dir').html(str);
+                    });
+                });
+                var download = function (filename) {
+                    un.download(filename);
                 };
-                $("#dir").html( str );
-            });
-        });
-        var download = function ( filename ) {
-            un.download( filename );
-        };
-    </script>
-</div>
-
-</body></html>
+            </script>
+        </div>
+    </body>
+</html>
